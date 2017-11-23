@@ -45,10 +45,10 @@ public class Writeback {
 			// Diferente de 0 pois r0 em mips é um registrador estático de valor 0,
 			// que não pode ser sobrescrito e não faz sentido armazenar 0 em um registrador
 			// sendo que o r0 é sempre 0.
-			//if (destino != 0) {
+			if (destino != 0) {
 				bReg.setValue(TipoRegistrador.valueOf(destino), dado);
 				bReg.clock();
-			//}
+			}
 		}
 	}
 }

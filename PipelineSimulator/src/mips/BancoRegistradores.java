@@ -86,27 +86,6 @@ public class BancoRegistradores {
 	}
 	
 	/**
-	 * Constrói String para ser exibida com as informações de cada registrador do banco.
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < 32; i++) {
-			builder.append("$r");
-			builder.append(i);
-			builder.append('\t');
-			builder.append(getRegistrador(TipoRegistrador.valueOf(i)).getValue());
-			builder.append('\n');
-		}
-		
-		return builder.toString();
-	}
-	
-	/*public boolean regValido(TipoRegistrador tipoRegistrador) {
-		return tipoRegistrador.ehValido();
-	}*/
-	
-	/**
 	 * Busca no HashMap o registrador com nome "tipoRegistrador" e o retorna,
 	 * para se usar seu conteúdo posteriormente.
 	 * @param tipoRegistrador
@@ -128,5 +107,26 @@ public class BancoRegistradores {
 		}
 		
 		return registrador;
+	}
+	
+	public boolean regValido(TipoRegistrador tipoRegistrador) {
+		return tipoRegistrador.ehValido();
+	}
+	
+	/**
+	 * Constrói String para ser exibida com as informações de cada registrador do banco.
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < 32; i++) {
+			builder.append("$r");
+			builder.append(i);
+			builder.append('\t');
+			builder.append(getRegistrador(TipoRegistrador.valueOf(i)).getValue());
+			builder.append('\n');
+		}
+		
+		return builder.toString();
 	}
 }

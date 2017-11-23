@@ -72,11 +72,11 @@ public class Executa {
 			break;
 		}
 		
-		// Envia os dados do banco de registradores id_ex para ex_mem.
-		id_ex.enviaDados(ex_mem);
-		
 		// Passa para o conjunto ex_mem o writeData e o resultado da ULA.
 		ex_mem.setValue(TipoRegistrador.ULA_RESULT, resultado);
 		ex_mem.setValue(TipoRegistrador.WRITE_DATA, writeData);
+		
+		// Envia os dados do banco de registradores id_ex para ex_mem.
+		id_ex.enviaDados(ex_mem);
 	}
 }
