@@ -28,6 +28,8 @@ public class Simulator {
 	 */
 	private BancoRegistradores bReg = new BancoRegistradores();
 	
+	private MemoriaCPU memoriaCPU;
+	
 	/**
 	 * Conjunto de estados do pipeline
 	 */
@@ -54,7 +56,7 @@ public class Simulator {
 	 */
 	public Simulator(String arq) throws IOException {
 		// Memória de instruções e de dados
-		MemoriaCPU memoriaCPU = new MemoriaCPU(arq);
+		memoriaCPU = new MemoriaCPU(arq);
 		
 		// Estágios do pipeline
 		busca = new Busca(if_id, memoriaCPU, pc);
@@ -79,18 +81,112 @@ public class Simulator {
 			// Writeback executa antes de decodifica por causa do conceito
 			// de divisão dos estágios em duas metades para cada ciclo de clock,
 			// para evitar algumas dependências.
-			writeback.run();
+			// writeback.run();
 			decodifica.run();
 			executa.run();
 			memoria.run();
 			writeback.run();
 			
 			busca.run();
-			writeback.run();
+			// writeback.run();
 			decodifica.run();
 			executa.run();
 			memoria.run();
 			writeback.run();
+			
+			/*
+			 * ideia para pipeline:
+			 * 
+			 * começa a encher o pipeline:
+			 * 
+			 * busca.run();
+			 * 
+			 *  // Olha se tem mais instrução para buscar
+			 * if (hasInstruction) {
+			 * decodifica.run();
+			 * busca.run();
+			 * }
+			 * 	 // Caso não, esvazia o pipeline
+			 * else {
+			 * decodifica.run();
+			 * 
+			 * executa.run();
+			 * 
+			 * memoria.run();
+			 * 
+			 * writeback.run();
+			 * break;
+			 * }
+			 * 
+			 *  // Olha se tem mais instrução para buscar
+			 * if (hasInstruction) {
+			 * executa.run();
+			 * decodifica.run();
+			 * busca.run();
+			 * }
+			 *  // Caso não, esvazia o pipeline
+			 * else {
+			 * executa.run();
+			 * decodifica.run();
+			 * 
+			 * memoria.run();
+			 * executa.run();
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * 
+			 * writeback.run();
+			 * break;
+			 * }
+			 * 
+			 *  // Olha se tem mais instrução para buscar
+			 * if (hasInstruction) {
+			 * memoria.run();
+			 * executa.run();
+			 * decodifica.run();
+			 * busca.run();
+			 * }
+			 * else {
+			 * memoria.run();
+			 * executa.run();
+			 * decodifica.run();
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * executa.run();
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * 
+			 * writeback.run();
+			 * break;
+			 * 
+			 * com o pipeline cheio:
+			 * 
+			 * while (hasInstruction) {
+			 * writeback.run();
+			 * memoria.run();
+			 * executa.run();
+			 * decodifica.run();
+			 * busca.run();
+			 * }
+			 * 
+			 * começa a esvaziar o pipeline:
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * executa.run();
+			 * decodifica.run();
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * executa.run();
+			 * 
+			 * writeback.run();
+			 * memoria.run();
+			 * 
+			 * writeback.run();
+			 */
 			
 			numCiclos++;
 			
@@ -100,6 +196,9 @@ public class Simulator {
 		
 		System.out.println("Número de ciclos: " + numCiclos);
 		System.out.println(bReg);
+		
+		System.out.println("Memória: ");
+		System.out.println(memoriaCPU);
 	}
 	
 	/**

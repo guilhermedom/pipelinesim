@@ -64,8 +64,11 @@ public class Decodifica {
 			 // Armazena os valores dos argumentos no conjunto de registradores.
 			 id_ex.setValue(TipoRegistrador.RS, bReg.getValue(TipoRegistrador.valueOf(arg1)));
 			 id_ex.setValue(TipoRegistrador.RT, bReg.getValue(TipoRegistrador.valueOf(arg2)));
-			 id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+
+			 id_ex.setValue(TipoRegistrador.RD, TipoRegistrador.getPositionNome(destino));
 			 
+			 System.out.println(id_ex.getValue(TipoRegistrador.RD));
+
 			 // Armazena a operação no conjunto de registradores.
 			 id_ex.setValueIns(operacao);	
 			 

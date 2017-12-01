@@ -39,7 +39,7 @@ public class Memoria {
 		if (ex_mem.getValue(TipoRegistrador.MEM_READ) == 1) {
 			
 			String palavra = memoria.getValue(ex_mem.getValue(TipoRegistrador.ULA_RESULT));
-					
+									
 			long palavraEmLong = Long.parseLong(palavra);
 			
 			mem_wb.setValue(TipoRegistrador.MEM_RESULT, palavraEmLong);
@@ -55,7 +55,7 @@ public class Memoria {
 					dado);
 		}
 		
-		// Envia os dados nos registradores do conjunto ex_mem para o conjunto mem_wb;
+		// Envia os dados nos registradores do conjunto ex_mem para o conjunto mem_wb.
 		ex_mem.enviaDados(mem_wb);
 	}
 }

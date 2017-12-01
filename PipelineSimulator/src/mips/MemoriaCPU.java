@@ -52,8 +52,8 @@ public class MemoriaCPU {
 	 * @return A palavra buscada.
 	 */
 	public String getValue(long pos) {
-		// Obtém o endereço da palavra pelo endereço "pos" do byte com shift de 2.
-		long enderecoMemoria = pos >> 2;
+		// Obtém o endereço da palavra pelo endereço "pos".
+		long enderecoMemoria = pos;
 		
 		// Verifica se a posição da palavra existe na memória.
 		if (enderecoMemoria >= memoria.size()) {
@@ -80,5 +80,19 @@ public class MemoriaCPU {
 		}
 		
 		memoria.set((int) enderecoMemoria, valor);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < memoria.size(); i++) {
+			builder.append("Palavra: ");
+			builder.append(i);
+			builder.append('\t');
+			builder.append(memoria.get(i));
+			builder.append('\n');
+		}
+		
+		return builder.toString();
 	}
 }

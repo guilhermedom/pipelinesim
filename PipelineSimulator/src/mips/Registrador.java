@@ -20,6 +20,7 @@ public class Registrador {
 	/**
 	 * Controla quando o conteúdo do registrador pode ser sobrescrito.
 	 */
+	@SuppressWarnings("unused")
 	private boolean disableWrite = false;
 	
 	/**
@@ -49,6 +50,10 @@ public class Registrador {
 	
 	public void setValue(long novoValor) {
 		this.valor = novoValor;
+	}
+	
+	public long getValuePC() {
+		return pc;
 	}
 	
 	/**

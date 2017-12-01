@@ -18,6 +18,8 @@ public class ProgramCounter extends Registrador {
 	 * /posição a posição do hashmap de memória.
 	 */
 	public void avança() {
-		pc = getValue() + 1;
+		//pc = getValue() + 1;
+		pc++;
+		System.out.println("Novo PC: " + pc);
 	}
 }

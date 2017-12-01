@@ -12,6 +12,7 @@ public class Writeback {
 	private final RegInterno mem_wb;
 	private final BancoRegistradores bReg;
 	
+	
 	/**
 	 * Construtor preenche os conjuntos de registradores os quais o estágio acessa.
 	 * @param mem_wb Banco de registradores interno do estágio anterior.

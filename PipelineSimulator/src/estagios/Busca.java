@@ -32,7 +32,9 @@ public class Busca {
 	 * Executa o estágio de busca.
 	 */
 	public void run() {
-		String instrucao = memoria.getValue(pc.getValue());		
+		String instrucao = memoria.getValue(pc.getValuePC());
+		
+		System.out.println("Instrução atual em execução: " + instrucao);
 		
 		// Pega uma instrução na memória onde o pc se encontra, passa para o conjunto interno
 		// de registradores if_id que segue para o estágio decodifica.

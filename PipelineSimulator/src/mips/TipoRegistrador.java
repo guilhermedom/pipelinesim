@@ -84,9 +84,17 @@ public enum TipoRegistrador {
 		return null;
 	}
 	
-	public static int getPosition(TipoRegistrador tipoRegistrador) {
+	public static long getPosition(TipoRegistrador tipoRegistrador) {
 		for (TipoRegistrador tR : TipoRegistrador.values()) {
 			if (tipoRegistrador.name().equals(tR.name()))
+				return tR.ordinal();
+		}
+		return 0;
+	}
+	
+	public static long getPositionNome(String nome) {
+		for (TipoRegistrador tR : TipoRegistrador.values()) {
+			if (nome.equals(tR.name()))
 				return tR.ordinal();
 		}
 		return 0;
