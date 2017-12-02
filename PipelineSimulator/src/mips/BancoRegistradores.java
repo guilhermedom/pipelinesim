@@ -11,6 +11,7 @@ public class BancoRegistradores {
 	 */
 	protected HashMap<TipoRegistrador, Registrador> registradores = new HashMap<TipoRegistrador, Registrador>();
 	
+	// Registrador especial que armazena a String que se refere a instrução em execução atualmente.
 	protected String ins;
 	
 	Registrador reg = new Registrador();
@@ -18,7 +19,7 @@ public class BancoRegistradores {
 	/**
 	 * Controla a escrita no banco de registradores para a função clock().
 	 */
-	private boolean disableWrite = false;
+	//private boolean disableWrite = false;
 	
 	/**
 	 * Seta um novo valor para um registrador do banco. Apenas quando a função clock roda.
@@ -58,31 +59,28 @@ public class BancoRegistradores {
 		return ins;
 	}
 	
-	/**
+	/*/**
 	 * Desabilita a escrita no banco de registradores.
-	 */
+	 
 	public void disableWrite() {
 		disableWrite = true;
 	}
 	
 	/**
 	 * Habilita a escrita no banco de registradores.
-	 */
+	 
 	public void enableWrite() {
 		disableWrite = false;
-	}
+	} */
 	
 	/**
 	 * Avança o ciclo de clock em todos os registradores do banco.
 	 */
 	public void clock() {
-		if (!disableWrite) {
-			for (Registrador registrador : registradores.values()) {
+		//if (!disableWrite) {
+			for (Registrador registrador : registradores.values()) 
 				registrador.clock();
-			}
-		} else {
-			disableWrite = false;
-		}
+		//} else disableWrite = false;
 	}
 	
 	/**
@@ -92,9 +90,9 @@ public class BancoRegistradores {
 	 * @return
 	 */
 	private Registrador getRegistrador(TipoRegistrador tipoRegistrador) {
-		/*if (!regValido(tipoRegistrador)) {
+		if (!regValido(tipoRegistrador)) {
 			throw new IllegalArgumentException("Registrador inválido: " + tipoRegistrador.name());
-		}*/
+		}
 		
 		// Procura no HashMap o registrador "tipoRegistrador".
 		Registrador registrador = registradores.get(tipoRegistrador);

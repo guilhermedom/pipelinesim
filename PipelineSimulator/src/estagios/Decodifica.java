@@ -23,7 +23,7 @@ public class Decodifica {
 	// Variáveis que indicam a posição para onde será feito o branch 
 	// (para onde o pc vai apontar em caso de branch).
 	private long imediatoBranchOffset;
-	private long imediatoBranchSW;
+	//private long imediatoBranchSW;
 	
 	// Entradas da ula no próximo estágio.
 	private long readData1;
@@ -67,7 +67,7 @@ public class Decodifica {
 
 			 id_ex.setValue(TipoRegistrador.RD, TipoRegistrador.getPositionNome(destino));
 			 
-			 System.out.println(id_ex.getValue(TipoRegistrador.RD));
+			 //System.out.println(id_ex.getValue(TipoRegistrador.RD));
 
 			 // Armazena a operação no conjunto de registradores.
 			 id_ex.setValueIns(operacao);	
@@ -86,7 +86,9 @@ public class Decodifica {
 			 
 			 id_ex.setValue(TipoRegistrador.RS, bReg.getValue(TipoRegistrador.valueOf(arg1)));
 			 id_ex.setValue(TipoRegistrador.RT, bReg.getValue(TipoRegistrador.valueOf(arg2)));
-			 id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 //id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 
+			 id_ex.setValue(TipoRegistrador.RD, TipoRegistrador.getPositionNome(destino));
 			 
 			 id_ex.setValueIns(operacao);		
 			 
@@ -103,7 +105,9 @@ public class Decodifica {
 			 
 			 id_ex.setValue(TipoRegistrador.RS, bReg.getValue(TipoRegistrador.valueOf(arg1)));
 			 id_ex.setValue(TipoRegistrador.RT, bReg.getValue(TipoRegistrador.valueOf(arg2)));
-			 id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 //id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 
+			 id_ex.setValue(TipoRegistrador.RD, TipoRegistrador.getPositionNome(destino));
 			 
 			 id_ex.setValueIns(operacao);
 			 
@@ -120,7 +124,9 @@ public class Decodifica {
 			 
 			 id_ex.setValue(TipoRegistrador.RS, bReg.getValue(TipoRegistrador.valueOf(arg1)));
 			 id_ex.setValue(TipoRegistrador.RT, bReg.getValue(TipoRegistrador.valueOf(arg2)));
-			 id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 //id_ex.setValue(TipoRegistrador.RD, bReg.getValue(TipoRegistrador.valueOf(destino)));
+			 
+			 id_ex.setValue(TipoRegistrador.RD, TipoRegistrador.getPositionNome(destino));
 			 
 			 id_ex.setValueIns(operacao);
 			 
@@ -162,7 +168,7 @@ public class Decodifica {
 			 String offset = pedacos[2]; // offset
 			 String origem = pedacos[3]; // RS
 			 
-			 // Recebe a posição da memória onde será colocado o dado.
+			 // Recebe a posição da memória a qual somada com o offset resultará na posição onde será colocado o dado.
 			 id_ex.setValue(TipoRegistrador.RS, if_id.getValue(TipoRegistrador.valueOfName(origem)));
 
 			 // O Registrador RT contém o dado que será colocado na memória.
@@ -192,7 +198,7 @@ public class Decodifica {
 			 
 			 // Variável para ser usada no método fazBranch com o valor do offset que afetará o pc.
 			 imediatoBranchOffset = Long.parseLong(offset);
-			 imediatoBranchSW = bReg.getValue(TipoRegistrador.valueOf(arg1));
+			 //imediatoBranchSW = bReg.getValue(TipoRegistrador.valueOf(arg1));
 			 
 			 id_ex.setValueIns(operacao);
 			 
@@ -213,7 +219,7 @@ public class Decodifica {
 				&& sinaisControle.get(TipoRegistrador.BRANCH_NE) == 1
 				&& readData1 != readData2) {
 			// A soma dos valores indica para onde o pc será encaminhado.
-			fazBranch(imediatoBranchOffset + imediatoBranchSW);
+			fazBranch(imediatoBranchOffset);
 		}
 	}
 	
@@ -226,7 +232,7 @@ public class Decodifica {
 		zerarSinaisControle(if_id);
 		
 		pc.setValue(pos);
-		pc.enableWrite();
+		//pc.enableWrite();
 	}
 	
 	/**

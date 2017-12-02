@@ -19,7 +19,7 @@ public class ProgramCounter extends Registrador {
 	 */
 	public void avança() {
 		//pc = getValue() + 1;
-		pc++;
-		System.out.println("Novo PC: " + pc);
+		valor++;
+		System.out.println("Novo PC: " + valor);
 	}
 }

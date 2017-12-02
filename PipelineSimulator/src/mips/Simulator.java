@@ -75,7 +75,7 @@ public class Simulator {
 		int numCiclos = 0;
 		
 		// Aqui precisa ter um laço para que o programa funcione como um pipeline
-		//while () {
+		for (int i = 0; i < 9; i++) {
 			
 			busca.run();
 			// Writeback executa antes de decodifica por causa do conceito
@@ -87,12 +87,11 @@ public class Simulator {
 			memoria.run();
 			writeback.run();
 			
-			busca.run();
-			// writeback.run();
-			decodifica.run();
-			executa.run();
-			memoria.run();
-			writeback.run();
+			numCiclos++;
+			
+			// Avança o ciclo de clock.
+			clock();
+		}
 			
 			/*
 			 * ideia para pipeline:
@@ -187,11 +186,6 @@ public class Simulator {
 			 * 
 			 * writeback.run();
 			 */
-			
-			numCiclos++;
-			
-			// Avança o ciclo de clock.
-			clock();
 		//}
 		
 		System.out.println("Número de ciclos: " + numCiclos);

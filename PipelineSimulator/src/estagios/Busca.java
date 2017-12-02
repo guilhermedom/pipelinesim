@@ -32,7 +32,7 @@ public class Busca {
 	 * Executa o estágio de busca.
 	 */
 	public void run() {
-		String instrucao = memoria.getValue(pc.getValuePC());
+		String instrucao = memoria.getValue(pc.getValue());
 		
 		System.out.println("Instrução atual em execução: " + instrucao);
 		

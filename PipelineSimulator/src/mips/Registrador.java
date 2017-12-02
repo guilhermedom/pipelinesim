@@ -15,13 +15,12 @@ public class Registrador {
 	 * Conteúdo do registrador.
 	 */
 	protected long valor = 0;
-	protected long pc = 0;
+	//protected long pc = 0;
 	
 	/**
 	 * Controla quando o conteúdo do registrador pode ser sobrescrito.
 	 */
-	@SuppressWarnings("unused")
-	private boolean disableWrite = false;
+//	private boolean disableWrite = false;
 	
 	/**
 	 * Novo conteúdo do registrador que será atualizado quando clock()
@@ -52,33 +51,33 @@ public class Registrador {
 		this.valor = novoValor;
 	}
 	
-	public long getValuePC() {
+	/*public long getValuePC() {
 		return pc;
 	}
 	
 	/**
 	 * Desabilita a escrita no registrador.
-	 */
+	 
 	public void disableWrite() {
 		this.disableWrite = true;
 	}
 	
-	/**
+	**
 	 * Habilita a escrita no registrador.
-	 */
+	 *
 	public void enableWrite() {
 		this.disableWrite = false;
-	}
+	}*/
 	
 	/**
 	 * Atualiza o valor do registrador com o novo valor da variável novoValor.
 	 * Apenas funciona quando a escrita está habilitada.
 	 */
 	public void clock() {
-		/*if (!disableWrite) {
+		if (novoValor != -1) {
 			valor = novoValor;
 			novoValor = -1;
-		} else
-			disableWrite = false;*/
+		}
+		//} else disableWrite = false;
 	}
 }
