@@ -73,11 +73,11 @@ public class Registrador {
 	 * Atualiza o valor do registrador com o novo valor da variável novoValor.
 	 * Apenas funciona quando a escrita está habilitada.
 	 */
-	public void clock() {
+	/*public void clock() {
 		if (novoValor != -1) {
 			valor = novoValor;
 			novoValor = -1;
 		}
 		//} else disableWrite = false;
-	}
+	}*/
 }

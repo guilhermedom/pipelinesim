@@ -74,11 +74,11 @@ public class Simulator {
 		// Contador de número de ciclos.
 		int numCiclos = 0;
 		
-		// Aqui precisa ter um laço para que o programa funcione como um pipeline
+		/// Aqui precisa de um laço que lê todas as instruções até o fim.
 		for (int i = 0; i < 9; i++) {
 			
 			busca.run();
-			// Writeback executa antes de decodifica por causa do conceito
+			// Writeback talvez deve executar antes de decodifica por causa do conceito
 			// de divisão dos estágios em duas metades para cada ciclo de clock,
 			// para evitar algumas dependências.
 			// writeback.run();
@@ -90,7 +90,7 @@ public class Simulator {
 			numCiclos++;
 			
 			// Avança o ciclo de clock.
-			clock();
+			//clock();
 		}
 			
 			/*
@@ -198,11 +198,11 @@ public class Simulator {
 	/**
 	 *  Avança o ciclo de clock em todos os registradores.
 	 */
-	private void clock() {
+	/*private void clock() {
 		pc.clock();
 		if_id.clock();
 		id_ex.clock();
 		ex_mem.clock();
 		mem_wb.clock();
-	}
+	}*/
 }

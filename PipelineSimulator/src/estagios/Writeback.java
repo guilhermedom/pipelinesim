@@ -48,7 +48,7 @@ public class Writeback {
 			// sendo que o r0 é sempre 0.
 			if (destino != 0) {
 				bReg.setValue(TipoRegistrador.valueOf(destino), dado);
-				bReg.clock();
+				//bReg.clock();
 			}
 		}
 	}

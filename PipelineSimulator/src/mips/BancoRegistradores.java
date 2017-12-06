@@ -76,12 +76,12 @@ public class BancoRegistradores {
 	/**
 	 * Avança o ciclo de clock em todos os registradores do banco.
 	 */
-	public void clock() {
+	/*public void clock() {
 		//if (!disableWrite) {
 			for (Registrador registrador : registradores.values()) 
 				registrador.clock();
 		//} else disableWrite = false;
-	}
+	}*/
 	
 	/**
 	 * Busca no HashMap o registrador com nome "tipoRegistrador" e o retorna,
