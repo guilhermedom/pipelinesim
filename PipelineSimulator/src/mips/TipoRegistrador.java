@@ -11,55 +11,35 @@ public enum TipoRegistrador {
 	
 	// Registradores com parâmetro false indicam registradores que não podem ser usados
 	// em operações da ULA.
-	INSTRUCAO(false), 
+	INSTRUCAO, 
 	
-	RS(false), RT(false), RD(false),
+	RS, RT, RD,
 
-	IMEDIATO(false), SHIFT_AMT(false),  ENDERECO(false), R_DST(false),
+	IMEDIATO, SHIFT_AMT,  ENDERECO, R_DST,
 	
-	ULA_SRC(false),
+	ULA_SRC,
 	
-	MEM_TO_REG(false), REG_WRITE(false),
+	MEM_TO_REG, REG_WRITE,
 	
-	MEM_READ(false), MEM_WRITE(false),
+	MEM_READ, MEM_WRITE,
 	
-	BRANCH(false), BRANCH_NE(false),
+	BRANCH, BRANCH_NE,
 	
-	ULA_OP(false),
+	ULA_OP,
 	
-	JUMP(false), JUMP_SRC(false),
+	JUMP, JUMP_SRC,
 	
-	READ_DATA1(false), READ_DATA2(false),
+	READ_DATA1, READ_DATA2,
 	
-	ULA_RESULT(false), MEM_RESULT(false), 
+	ULA_RESULT, MEM_RESULT, 
 	
-	WRITE_DATA(false),
+	WRITE_DATA,
 	
-	HALT(false),
+	HALT,
 	
-	OP_CODE(false), 
+	OP_CODE, 
 	
-	PC(false);
-	
-	// Variável para verificar validade do registrador.
-	// Só se pode valores de operações e de dados nos registradores r1~r31.
-	// Os outros são para sinais de controle.
-	private final boolean valido;
-	
-	/**
-	 *  Caso seja declarado sem parâmetro então pode-se escrever nele/é válido.
-	 */
-	private TipoRegistrador() {
-		this(true);
-	}
-	
-	/**
-	 *  Declaração com valor da validade.
-	 * @param valido Validade do registrador para operações.
-	 */
-	private TipoRegistrador(boolean valido) {
-		this.valido = valido;
-	}
+	PC;
 	
 	/**
 	 *  Retorna o nome do TipoRegistrador de acordo com o valor de ordinal.
@@ -98,13 +78,5 @@ public enum TipoRegistrador {
 				return tR.ordinal();
 		}
 		return 0;
-	}
-	
-	/**
-	 * Verifica se é possível usar o registrador nas operações.
-	 * @return Validade do registrador em boolean.
-	 */
-	public boolean ehValido() {
-		return valido;
 	}
 }

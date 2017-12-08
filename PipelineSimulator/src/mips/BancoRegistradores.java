@@ -90,9 +90,6 @@ public class BancoRegistradores {
 	 * @return
 	 */
 	private Registrador getRegistrador(TipoRegistrador tipoRegistrador) {
-		if (!regValido(tipoRegistrador)) {
-			throw new IllegalArgumentException("Registrador inválido: " + tipoRegistrador.name());
-		}
 		
 		// Procura no HashMap o registrador "tipoRegistrador".
 		Registrador registrador = registradores.get(tipoRegistrador);
@@ -105,10 +102,6 @@ public class BancoRegistradores {
 		}
 		
 		return registrador;
-	}
-	
-	public boolean regValido(TipoRegistrador tipoRegistrador) {
-		return tipoRegistrador.ehValido();
 	}
 	
 	/**
