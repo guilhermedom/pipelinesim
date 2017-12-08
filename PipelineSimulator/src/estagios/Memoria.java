@@ -39,7 +39,14 @@ public class Memoria {
 		if (ex_mem.getValue(TipoRegistrador.MEM_READ) == 1) {
 			
 			String palavra = memoria.getValue(ex_mem.getValue(TipoRegistrador.ULA_RESULT));
-									
+			
+			// Verifica se o dado no qual se faz a leitura não é o delimitador da memória.
+			if (palavra.compareTo("|") == 0) {
+				System.out.println("Posicao que esta se tentando ler nao eh valida por ser o delimitador"
+						+ " entre memoria de instrucao e de dado");
+				mem_wb.setErro();
+				return;
+			}
 			long palavraEmLong = Long.parseLong(palavra);
 			
 			mem_wb.setValue(TipoRegistrador.MEM_RESULT, palavraEmLong);
@@ -51,6 +58,13 @@ public class Memoria {
 			// pelos registradores.
 			String dado = Long.toString(ex_mem.getValue(TipoRegistrador.WRITE_DATA));
 			
+			if (ex_mem.getValue(TipoRegistrador.ULA_RESULT) <= memoria.getLimite())
+			{
+				System.out.println("A posicao onde se deseja escrever e invalida pois faz parte da memoria"
+						+ " de instrucao. O valor nao foi armazenado na memoria.");
+				mem_wb.setErro();
+				return;
+			}
 			memoria.storeValue(ex_mem.getValue(TipoRegistrador.ULA_RESULT),
 					dado);
 		}

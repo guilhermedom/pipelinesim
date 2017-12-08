@@ -6,6 +6,10 @@ import java.util.Map.Entry;
  */
 
 public class RegInterno extends BancoRegistradores {
+	/**
+	 * Variável para guardar erros diversos e cancelar o writeback da instrução com erro.
+	 */
+	int erro = 0;
 	
 	/**
 	 * Construtor que cria um grupo de registradores internos e coloca no banco "registradores".
@@ -46,5 +50,13 @@ public class RegInterno extends BancoRegistradores {
 		}
 		
 		return builder.toString();
+	}
+	
+	public void setErro() {
+		erro = 1;
+	}
+	
+	public int getErro() {
+		return erro;
 	}
 }

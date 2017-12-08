@@ -1,5 +1,7 @@
 package mips;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import estagios.Busca;
 import estagios.Decodifica;
@@ -13,6 +15,9 @@ import estagios.Writeback;
  */
 
 public class Simulator {	
+	
+	private static ArrayList<String> entrada = new ArrayList<String>();
+	
 	/**
 	 * Conjunto de registradores entre cada estágio de pipeline.
 	 */
@@ -44,11 +49,33 @@ public class Simulator {
 	 * @param args
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException {		
-		Simulator sim = new Simulator("teste.txt");
+	public static void main(String[] args) throws IOException {	
+		try (Scanner scanner = new Scanner(System.in)) {	
+			String palavra;
 		
-		// Executa o simulador criado acima.
-		sim.run();
+			do {
+				System.out.println("Digite uma instrução: ");
+				palavra = scanner.nextLine();
+				if (palavra.compareTo("pare") == 0)
+					break;
+				entrada.add(palavra);
+			} while (true);
+			
+			entrada.add("|");
+			
+			do {
+				System.out.println("Digite um dado: ");
+				palavra = scanner.nextLine();
+				if (palavra.compareTo("pare") == 0)
+					break;
+				entrada.add(palavra);
+			} while (true);
+		
+			Simulator sim = new Simulator(entrada);
+		
+			// Executa o simulador criado acima.
+			sim.run();
+		}
 	}
 	
 	/**
@@ -66,16 +93,30 @@ public class Simulator {
 		writeback = new Writeback(mem_wb, bReg);
 	}
 	
+	public Simulator(ArrayList<String> entrada) throws IOException {
+		// Memória de instruções e de dados
+		memoriaCPU = new MemoriaCPU(entrada);
+		
+		// Estágios do pipeline
+		busca = new Busca(if_id, memoriaCPU, pc);
+		decodifica = new Decodifica(if_id, id_ex, bReg, pc);
+		executa = new Executa(id_ex, ex_mem, mem_wb);
+		memoria = new Memoria(ex_mem, mem_wb, memoriaCPU);
+		writeback = new Writeback(mem_wb, bReg);
+	}
+	
 	/**
 	 * Executa o simulador
 	 */
 	public void run() {
+		int i = 0;
 		
+		int tamanhoMemIns = memoriaCPU.getLimite();
 		// Contador de número de ciclos.
 		int numCiclos = 0;
 		
 		/// Aqui precisa de um laço que lê todas as instruções até o fim.
-		for (int i = 0; i < 9; i++) {
+		/*for (int i = 0; i < 9; i++) {
 			
 			busca.run();
 			// Writeback talvez deve executar antes de decodifica por causa do conceito
@@ -91,8 +132,65 @@ public class Simulator {
 			
 			// Avança o ciclo de clock.
 			//clock();
-		}
+		}*/
+		
+			if (i < tamanhoMemIns) {
+				busca.run();
+				numCiclos++;
+				i++;
+			}
 			
+			if (i < tamanhoMemIns) {
+				decodifica.run();
+				busca.run();
+				numCiclos++;
+				i++;
+			}
+
+			if (i < tamanhoMemIns) {
+				executa.run();
+				decodifica.run();
+				busca.run();
+				numCiclos++;
+				i++;
+			}
+
+			if (i < tamanhoMemIns) {
+				memoria.run();
+				executa.run();
+				decodifica.run();
+				busca.run();
+				numCiclos++;
+				i++;
+			}
+			while (i < tamanhoMemIns) {
+				writeback.run();
+				memoria.run();
+				executa.run();
+				decodifica.run();
+				busca.run();			
+				numCiclos++;
+				i++;
+			}
+
+			writeback.run();
+			memoria.run();
+			executa.run();
+			decodifica.run();
+			numCiclos++;
+
+			writeback.run();
+			memoria.run();
+			executa.run();
+			numCiclos++;
+
+			writeback.run();
+			memoria.run();
+			numCiclos++;
+
+			writeback.run();
+			numCiclos++;
+
 			/*
 			 * ideia para pipeline:
 			 * 

@@ -46,6 +46,12 @@ public class MemoriaCPU {
 		//memoria.add(arq);
 	}
 	
+	public MemoriaCPU(ArrayList<String> entrada) throws IOException {
+		
+		memoria = entrada;
+		
+	}
+	
 	/**
 	 * Busca o valor em uma dada posição de memória.
 	 * @param pos A posição na memória em byte da palavra desejada.
@@ -80,6 +86,11 @@ public class MemoriaCPU {
 		}
 		
 		memoria.set((int) enderecoMemoria, valor);
+	}
+	
+	public int getLimite() {
+		int posicao = memoria.indexOf("|");
+		return posicao;
 	}
 	
 	@Override

@@ -28,6 +28,9 @@ public class Writeback {
 	 * Executa o estágio de writeback, escrevendo de acordo com os sinais de controle.
 	 */
 	public void run() {
+		if (mem_wb.getErro() == 1)
+			return;
+		
 		if (mem_wb.getValue(TipoRegistrador.REG_WRITE) == 1) {
 			
 			// Writeback escreve de volta no banco, ou em RD ou em RT.
